@@ -4,16 +4,12 @@ import time
 
 
 id=time.strftime("%Y%m%d%H%M%S")
-#from requests.auth import HTTPBasicAuth
 #### CONFIG ###
 logfile="aoc.log"
 loglevel=logging.DEBUG
 filelevel=logging.DEBUG
 consolelevel=logging.DEBUG
-eurusdconv=1.16
-# Azure Enrollment
 app="aoc"
-process=""
 ##################################
 configuration={}
 configuration['LOGLEVEL']=os.getenv("LOGLEVEL","INFO")

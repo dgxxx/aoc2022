@@ -1,4 +1,4 @@
-from tools import config, log
+#from tools import config, log
 
 
 def read_input(name):
