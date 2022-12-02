@@ -1,4 +1,7 @@
-#from tools import config, log
+from tools import config, log,helper
+today="2"
+
+inputfile="input."+today
 
 decisionmatrix={"R": {"X":"S","Y":"R","Z":"P"},
             "P":{"X":"R","Y":"P","Z":"S"},
@@ -39,40 +42,40 @@ def rpc(oponent, me):
     return finalresult
     
 
-def day02_01():
-    inputdata = read_input("input.2")
+
+
+def puzzle_01():
+    inputdata = helper.read_input(inputfile)
     result=0
     
     for item in inputdata:
-        #print(item)
         oponent,me=item.split(" ")
         oponent=transform(oponent)
         me=transform(me)
         singleresult=rpc(oponent,me)
         result+=singleresult
-    print("Day02-1: Result: {}".format(result))
+    print("Puzzle-1: Result: {}".format(result))
 
 
 
-def day02_02():
+def puzzle_02():
 
-    inputdata = read_input("input.2")
+    inputdata = helper.read_input(inputfile)
     result=0
     
     for item in inputdata:
-        #print(item)
         oponent,res=item.split(" ")
         oponent=transform(oponent)
         me=decisionmatrix[oponent][res]
         singleresult=rpc(oponent,me)
         result+=singleresult
-    print("Day02-2: Max Result: {}".format(result))
+    print("Puzzle-2: Result: {}".format(result))
 
 
 print("-------------------------------")
-print("Day 02 Results")
+print("Day {} Results".format(today))
 print("-------------------------------")
-day02_01()
+puzzle_01()
 print("-------------------------------")
-day02_02()
+puzzle_02()
 print("-------------------------------")

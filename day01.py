@@ -1,14 +1,12 @@
-#from tools import config, log
+from tools import config, log,helper
+today="1"
 
+inputfile="input."+today
 
-def read_input(name):
-    with open(name, "r") as i:
-        inputdata = i.read().splitlines()
-    return inputdata
-
-
-def day01_01():
-    inputdata = read_input("input.1.1")
+def puzzle_01():
+    inputdata = helper.read_input(inputfile)
+    result=0
+    
     maxcalories = 0
     calories = 0
     for item in inputdata:
@@ -21,12 +19,14 @@ def day01_01():
         else:
             calories += int(item)
             #print("calories: {} ".format(calories))
-    print("Day01-1: Max Result: {}".format(maxcalories))
+    result=maxcalories
+    print("Puzzle-1: Result: {}".format(result))
 
 
-def day01_02():
 
-    inputdata = read_input("input.1.1")
+def puzzle_02():
+
+    inputdata = helper.read_input(inputfile)
     topelves = []
     maxcalories = 0
     calories = 0
@@ -44,13 +44,13 @@ def day01_02():
     # print(topelves)
     topelves.sort(reverse=True)
     result = sum(topelves[0:3])
-    print("Day01-2: Max Result: {}".format(result))
+    print("Puzzle-2: Result: {}".format(result))
 
 
 print("-------------------------------")
-print("Day 01 Results")
+print("Day {} Results".format(today))
 print("-------------------------------")
-day01_01()
+puzzle_01()
 print("-------------------------------")
-day01_02()
+puzzle_02()
 print("-------------------------------")
