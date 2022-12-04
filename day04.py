@@ -20,7 +20,7 @@ def puzzle_01():
         
         lp1=lp(p1)
         lp2=lp(p2)
-        
+        print(len(lp1-lp2)," ",len(lp2-lp1))
         if all(n in lp1 for n in lp2) or all(n in lp2 for n in lp1):
             result+=1
         
