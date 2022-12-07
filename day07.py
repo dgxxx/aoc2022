@@ -1,17 +1,104 @@
 from tools import config, log,helper
 today="7"
-
+dirs={}
 inputfile="input."+today
 
+def pdirs(workdir):
+    root=False
+    while not root:
+        size=dirs[workdir]["size"]
+        parent=dirs[workdir]["parent"]
+        if workdir=="/":
+            root=True
+            print("/ [{}]".format(size))
+        else:
+            print("{} [{}] - ".format(workdir,size),end="")
+        #print("WORKDIR: {} size: {} PARENT: {} size: {}".format(workdir,dirs[workdir]["size"],parent,dirs[parent]["size"]))
+        
+        workdir=parent
+        
+
+def updatesize(workdir,size):
+    root=False
+    while not root:
+        dirs[workdir]["size"]+=size
+        parent=dirs[workdir]["parent"]
+        if workdir=="/":
+            root=True
+            print("/ [{}] + {}".format(dirs[workdir]["size"],size))
+        else:
+            print("{} [{}] - ".format(workdir,dirs[workdir]["size"]),end="")
+        #print("WORKDIR: {} size: {} PARENT: {} size: {}".format(workdir,dirs[workdir]["size"],parent,dirs[parent]["size"]))
+        workdir=parent
+# not used
+def updatesizes():    
+    for dir in dirs:
+        print("DIR: {}".format(dir))
+        root=False
+        #if dir=="/":
+        #    root=True
+        workdir=dir
+        while not root:
+            size=dirs[workdir]["size"]
+            parent=dirs[workdir]["parent"]
+            print("WORKDIR: {} size: {} PARENT: {} size: {}".format(workdir,dirs[workdir]["size"],parent,dirs[parent]["size"]))
+            dirs[parent]["size"]+=size
+            print("WORKDIR: {} size: {} PARENT: {} size: {}".format(workdir,dirs[workdir]["size"],parent,dirs[parent]["size"]))
+            workdir=parent
+            if workdir=="/":
+                root=True
 def puzzle_01():
     inputdata = helper.read_input(inputfile)
     result=0
     
+    dirs["/"]={}
+    dirs["/"]["size"]=0
+    dirs["/"]["parent"]="/"
+    dir="/"
+    parentdir="/"
+    currentdir=dir
     for item in inputdata:
         print(item)
+        currentdir=dir
+        if item.find("$ cd")==0:
+            dir=item.split(" ")[-1]
+            #print("directory change: "+dir)
+            if dir=="..":
+                dir=dirs[currentdir]["parent"]
+                pdirs(dir)
+            elif dir=="/":
+                currentdir="/"
+                pdirs(dir)
+            else:
+                if not dirs.get(dir,False):
+                    dirs[dir]={}
+                    dirs[dir]["parent"]=currentdir
+                    dirs[dir]["size"]=0
+                    currentdir=dir
+                    pdirs(dir)
+        elif item.find("dir")==0:
+            #print("dir found:"+item)
+            if not dirs.get(dir,False):
+                c,d=item.split(" ")
+                dirs[d]={}
+                dirs[d]["parent"]=currentdir
+                dirs[d]["size"]=0        
+        elif item.find("$ ls")==0:
+            #print("ls command")
+            next
+        else:
+            #print("sizes:"+item)
+            size,fname=item.split(" ")
+            updatesize(currentdir,int(size))
+    #print(dirs)
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print("Filtering DIRS")
+    result=0
+    for dir in dirs:
+        if dirs[dir]["size"]<=100000:
+            pdirs(dir)
+            result+=dirs[dir]["size"]
     print("Puzzle-1: Result: {}".format(result))
-
-
 
 def puzzle_02():
 
@@ -28,5 +115,5 @@ print("Day {} Results".format(today))
 print("-------------------------------")
 puzzle_01()
 print("-------------------------------")
-puzzle_02()
+#puzzle_02()
 print("-------------------------------")

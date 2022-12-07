@@ -27,7 +27,7 @@ def puzzle_01():
             
         else:
             m=1
-            for n in range(1,stacknr*4,4):
+            for n in range(1,stacknr*4,4): 
                 field=item[n]
                 if field != " ":
                     stacks[m].insert(0,field)
