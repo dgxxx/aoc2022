@@ -12,7 +12,7 @@ consolelevel=logging.DEBUG
 app="aoc"
 ##################################
 configuration={}
-configuration['LOGLEVEL']=os.getenv("LOGLEVEL","INFO")
+configuration['LOGLEVEL']=os.getenv("LOGLEVEL","DEBUG")
 if configuration['LOGLEVEL']=="DEBUG":
     loglevel=logging.DEBUG
 elif configuration['LOGLEVEL']=="INFO":
