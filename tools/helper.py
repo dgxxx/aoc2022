@@ -1,10 +1,10 @@
 def read_input(name):
     with open(name, "r") as i:
-        inputdata = i.read()
+        inputdata = i.read().splitlines()
     return inputdata
 
 
-def read_inputlines(name):
+def read_inputline(name):
     with open(name, "r") as i:
-        inputdata = i.read().splitlines()
+        inputdata = i.read()
     return inputdata
