@@ -26,6 +26,7 @@ def compare(l, r, level=0):
 
     maxitems = len(l)
     # print(maxitems)
+    for prio
     for n in range(maxitems):
         print("{}- n: {} ".format(prefix, n))
         if len(r) > n:
@@ -41,21 +42,30 @@ def compare(l, r, level=0):
 
 
 def puzzle_01():
-    inputdata = helper.read_input(inputfile)
+    #inputdata = helper.read_input(inputfile)
     result = 0
-    for index, group in enumerate(inputdata.strip().split("\n\n")):
-        print("== Pair {} ==".format(index+1))
+    d2 = 1
+    d6 = 1
 
-        left, right = group.splitlines()
-        left = eval(left)
-        right = eval(right)
+    data = list(map(eval, open(0).read().split()))
+    for group in data:
+        # print("== Pair {} ==".format(index+1))
 
-        print("- Compare {} vs {}".format(left, right))
-        res = compare(left, right)
-        if res < 0:
-            result += index+1
+        # left, right = group.splitlines()
+        # left = eval(left)
+        # right = eval(right)
+        #group = eval(group)
+        # print("- Compare {} vs {}".format(left, right))
 
-        ''' for itemindex, items in enumerate(zip(left, right)):
+        if compare(group, [[2]]) < 0:
+            d2 += 1
+            d6 += 1
+        elif compare(group, [[6]]) < 0:
+            d6 += 1
+
+    result = d2*d6
+
+    ''' for itemindex, items in enumerate(zip(left, right)):
             litem, ritem = items
 
             res = compare(litem, ritem)
@@ -78,7 +88,7 @@ def puzzle_01():
                 lf = len(litem)-len(ritem)
                 print("length: {}".format(lf)) '''
 
-        print("result: {}".format(result))
+    print("result: {}".format(result))
 
     print("Puzzle-1: Result: {}".format(result))
 
