@@ -4,13 +4,18 @@ today = "14"
 
 inputfile = "input."+today
 
+for y in range(500):
+    for y in range()
+
 
 def puzzle_01():
-    inputdata = helper.read_inputlines(inputfile)
+    inputdata = helper.read_input(inputfile)
     result = 0
-    print(inputdata)
-    # for path in inputdata:
-    #    print(path)
+
+    for path in inputdata:
+        print(path)
+        for point in path.split(" -> "):
+            print(point)
 
 
 def puzzle_02():
