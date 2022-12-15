@@ -25,7 +25,7 @@ def pr(d):
     print("--------------------------------------")
 
 
-def puzzle_01():
+def puzzle_02():
     inputdata = helper.read_input(inputfile)
     result = 0
     mx = 0
@@ -47,7 +47,7 @@ def puzzle_01():
             my = y
     #print(lx, mx, my)
 
-    abyss = my
+    abyss = my+2
     print("Abyss: {}".format(abyss))
     input("Press Enter to continue...")
     # print(max(map(int, i.split(",")) for i in inputdata.split(" -> ")))
@@ -56,10 +56,12 @@ def puzzle_01():
     #abyss = 0
     for y in range(my+5):
         grid[y] = {}
-        for x in range(lx-5, mx+5):
+        for x in range(lx-300, mx+300):
 
             grid[y][x] = "."
     grid[0][500] = "+"
+    for x in grid[abyss]:
+        grid[abyss][x] = "#"
     for path in inputdata:
 
         points = [list(map(int, point.split(",")))
@@ -109,11 +111,7 @@ def puzzle_01():
         while sandcornstatus:
 
             #print(posx, posy, abyss)
-            if posy == abyss:
-                print("Abyss reached with {} sandcorns".format(sandcorn-1))
-                result = sandcorn-1
-                finished = True
-                sandcornstatus = False
+
             if grid[posy+1][posx] == ".":
                 grid[posy+1][posx] = "o"
                 grid[posy][posx] = "."
@@ -139,24 +137,19 @@ def puzzle_01():
                     grid[posy][posx] = "o"
             # pr(grid)
             # time.sleep(0.05)
+            if posy == 0:
+                print("Abyss reached with {} sandcorns".format(sandcorn-1))
+                result = sandcorn
+                finished = True
+                sandcornstatus = False
 
-    print("Puzzle-1: Result: {}".format(result))
-
-
-def puzzle_02():
-
-    inputdata = helper.read_input(inputfile)
-    result = 0
-
-    # for item in inputdata:
-    #    print(item)
     print("Puzzle-2: Result: {}".format(result))
 
 
 print("-------------------------------")
 print("Day {} Results".format(today))
 print("-------------------------------")
-puzzle_01()
+# puzzle_01()
 print("-------------------------------")
 puzzle_02()
 print("-------------------------------")
